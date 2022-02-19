@@ -9,38 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var Item = (function () {
-    function Item() {
-    }
-    return Item;
-}());
-exports.Item = Item;
-var ITEMS = [
-    { id: 11, name: 'Eggs' },
-    { id: 12, name: 'Hot Dogs' },
-    { id: 13, name: 'Chicken' }
-];
-var CART = [];
+var form_store_1 = require('./form-store');
 var AppComponent = (function () {
-    function AppComponent() {
-        this.title = 'Grocery List';
-        this.subTitle = 'Simple grocery list application built with Angular 2 and Redux';
-        this.items = ITEMS;
-        this.cartItems = CART;
+    function AppComponent(store) {
+        this.store = store;
     }
-    AppComponent.prototype.onSelect = function (item) {
-        this.cartItems.push(item);
-        this.selectedItem = item;
-    };
-    AppComponent.prototype.onRemove = function (item) {
-        this.cartItems.splice(this.cartItems.indexOf(item), 1);
-    };
     AppComponent = __decorate([
         core_1.Component({
-            selector: 'my-app',
-            template: "\n    <h1>{{title}}</h1>\n    <h2>{{subTitle}}</h2>\n    <ul class=\"items\">\n      <li *ngFor=\"let item of items\" [class.selected]=\"item === selectedItem\">\n        {{item.name}}\n        <span class=\"pencil\" (click)=\"onSelect(item)\"> .. </span>\n      </li>\n    </ul>\n    <ul class=\"shopping-cart\">\n      <li *ngFor=\"let item of cartItems\">\n        {{item.name}}\n        <span class=\"pencil\" (click)=\"onRemove(item)\"> .. </span>\n      </li>\n    </ul>\n  ",
+            selector: 'app',
+            templateUrl: 'app/app.html',
+            styleUrls: ['app/app.css'],
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [form_store_1.FormStore])
     ], AppComponent);
     return AppComponent;
 }());

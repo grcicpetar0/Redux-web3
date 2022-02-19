@@ -1,0 +1,36 @@
+<md-sidenav-layout>
+    <md-sidenav #sidenav mode="side" class="app-sidenav">
+        <md-toolbar class="md-theme-indigo">
+            <h4 class="md-toolbar-tools">Menu</h4>
+        </md-toolbar>
+        <md-content layout-padding>
+            <md-list >
+                <md-list-item>
+                    <md-button routerLink="home" routerLinkActive="active" routerLinkActive="active">Home</md-button>
+                </md-list-item>
+                <md-list-item>
+                    <md-button routerLink="dapp-list"  routerLinkActive="active" routerLinkActive="active">Apps</md-button>
+                </md-list-item> 
+                <md-list-item>
+                    <md-button routerLink="form-list"  routerLinkActive="active" routerLinkActive="active">Forms</md-button>
+                </md-list-item> 
+            </md-list>
+
+        </md-content>
+    </md-sidenav>
+
+    <md-toolbar color="primary">
+        <md-button class="md-primary" (click)="sidenav.toggle()">
+            <i class="material-icons">menu</i>
+        </md-button>
+
+        <h2>Dynamic Forms Generator</h2>
+    </md-toolbar>
+    <md-content layout-padding>
+        <router-outlet></router-outlet>
+    </md-content>
+</md-sidenav-layout>
+
+
+
+
