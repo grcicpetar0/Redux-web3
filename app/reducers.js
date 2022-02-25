@@ -7,6 +7,12 @@ function dforms(state, action) {
         case 'ADD_DFORM':
             state.push(action.form);
             return state;
+        case 'UPDATE_DFORM':
+            var i = state.findIndex(function (form) {
+                return form.id === action.form.id;
+            });
+            state[i] = action.form;
+            return state;
         case 'REMOVE_DFORM':
             return state.delete(findIndexById());
         default:
@@ -29,17 +35,25 @@ function dapps(state, action) {
     }
 }
 exports.dapps = dapps;
-var reducers = Immutable.Map({
+var reducers = {
     "dforms": dforms,
-    "apps": dapps
-});
+    "dapps": dapps
+};
 var combineReducers = function (state, action) {
     if (state === void 0) { state = Immutable.Map({}); }
-    reducers.forEach(function (reducer, key) {
-        var oldState = state.get(key);
-        var newState = reducer(oldState, action);
-        state = state.set(key, newState);
-    });
+    var key = 'dforms';
+    var oldState = state.get(key);
+    var newState = reducers.dforms(oldState, action);
+    state = state.set(key, newState);
+    key = 'dapps';
+    var oldState = state.get(key);
+    var newState = reducers.dapps(oldState, action);
+    state = state.set(key, newState);
+    // reducers.forEach((reducer, key) => {
+    //   var oldState = state.get(key)
+    //   var newState = reducer(oldState, action)
+    //   state = state.set(key, newState)
+    // })
     return state;
 };
 var reducer = combineReducers;

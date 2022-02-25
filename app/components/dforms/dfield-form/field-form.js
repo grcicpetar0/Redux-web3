@@ -13,55 +13,51 @@ var router_1 = require('@angular/router');
 //import { Field } from '../../services/dforms';
 var forms_1 = require('@angular/forms');
 var form_store_1 = require('../../../form-store');
-var DformForm = (function () {
-    function DformForm(route, store) {
+var FieldFormComponent = (function () {
+    function FieldFormComponent(dform, route) {
         // See this blig post about model-driven forms http://blog.thoughtram.io/angular/2016/03/14/custom-validators-in-angular-2.html
+        this.dform = dform;
         this.route = route;
-        this.store = store;
         this.close = new core_1.EventEmitter();
-        this.showFormErrors = false;
+        this.questionTypeChoices = [];
     }
-    DformForm.prototype.ngOnInit = function () {
-        console.log(this.dform); // object here
+    FieldFormComponent.prototype.ngOnInit = function () {
+        console.log(this.field); // object here
         this.formGroup = new forms_1.FormGroup({
-            'name': new forms_1.FormControl(this.dform.name, forms_1.Validators.required),
-            'description': new forms_1.FormControl(this.dform.description, forms_1.Validators.required),
-            'apps': new forms_1.FormControl(this.dform.apps),
+            'label': new forms_1.FormControl(this.field.label, forms_1.Validators.required),
+            'slug': new forms_1.FormControl(this.field.slug, forms_1.Validators.required),
+            'type': new forms_1.FormControl(this.field.type, forms_1.Validators.required),
+            'required': new forms_1.FormControl(this.field.required, forms_1.Validators.required),
+            'helpText': new forms_1.FormControl(this.field.helpText)
         });
     };
-    DformForm.prototype.onSubmit = function (form) {
-        console.log("Form submitted, isvalid: ", this.formGroup.valid);
-        console.log("Form submitted, isvalid: ", this.formGroup.value);
+    FieldFormComponent.prototype.onSubmit = function (form) {
+        console.log("Form submitted", form);
         if (!this.formGroup.valid) {
-            this.showFormErrors = true;
             return;
         }
-        else {
-            this.showFormErrors = false;
-        }
-        this.goBack(this.formGroup.value);
     };
-    DformForm.prototype.goBack = function (dform) {
-        this.close.emit(dform);
+    FieldFormComponent.prototype.goBack = function (field) {
+        if (field === void 0) { field = null; }
+        this.close.emit(field);
         this.editIndex = null;
     };
     __decorate([
-        core_1.Input('dform'), 
+        core_1.Input('field'), 
         __metadata('design:type', Object)
-    ], DformForm.prototype, "dform", void 0);
+    ], FieldFormComponent.prototype, "field", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
-    ], DformForm.prototype, "close", void 0);
-    DformForm = __decorate([
+    ], FieldFormComponent.prototype, "close", void 0);
+    FieldFormComponent = __decorate([
         core_1.Component({
-            selector: 'dform-form',
-            templateUrl: 'app/components/dforms/dform-form/dform-form.html',
-            styleUrls: ['app/app.css', 'app/components/dforms/dforms.css']
+            selector: 'field-form',
+            templateUrl: './field-form.html'
         }), 
-        __metadata('design:paramtypes', [router_1.ActivatedRoute, form_store_1.FormStore])
-    ], DformForm);
-    return DformForm;
+        __metadata('design:paramtypes', [form_store_1.Dform, router_1.ActivatedRoute])
+    ], FieldFormComponent);
+    return FieldFormComponent;
 }());
-exports.DformForm = DformForm;
-//# sourceMappingURL=dform-form.js.map
+exports.FieldFormComponent = FieldFormComponent;
+//# sourceMappingURL=field-form.js.map

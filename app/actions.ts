@@ -10,7 +10,7 @@ export interface IFormAction {
 export interface IAppAction {
   type: string;
   slug: string;
-  app?: AppModel;
+  app?: DappModel;
 }
 
 
@@ -18,6 +18,14 @@ export function addForm(id: number, form: DformModel): IFormAction {
   return {
     type: 'ADD_DFORM',
     id,
+    form
+  };
+}
+
+export function updateForm(form: DformModel): IFormAction {
+  return {
+    type: 'UPDATE_DFORM',
+    id: form.id,
     form
   };
 }
@@ -33,7 +41,7 @@ export function removeForm(id: number): IFormAction {
 
 
 
-export function addApp(slug: string, app: AppModel): IAppAction {
+export function addApp(slug: string, app: DappModel): IAppAction {
   return {
     type: 'ADD_DAPP',
     slug,

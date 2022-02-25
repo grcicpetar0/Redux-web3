@@ -29,13 +29,13 @@ var Dform = (function () {
 exports.Dform = Dform;
 var initialState = Immutable.Map({
     dforms: [],
-    apps: []
+    dapps: []
 });
 var FormStore = (function () {
     function FormStore(http) {
         var _this = this;
-        //store = createStore(reducer, Immutable.List<Dform>());
         this.store = redux_1.createStore(reducers_1.default, initialState);
+        console.log("[DForm constructor()]");
         this.stateLoaded = false;
         this.formsSub = http.get("/app/components/dforms/mock_data.json")
             .map(function (response) { return response.json(); });
@@ -59,7 +59,7 @@ var FormStore = (function () {
     });
     Object.defineProperty(FormStore.prototype, "dapps", {
         get: function () {
-            return this.store.getState().get("apps");
+            return this.store.getState().get("dapps");
         },
         enumerable: true,
         configurable: true
@@ -69,8 +69,6 @@ var FormStore = (function () {
             var res = this.dforms.find(function (form) { return form.id === id; });
             var subject = new BehaviorSubject_1.BehaviorSubject(res);
             return subject;
-            //return this.dforms.find( form => form.id === id);
-            return observable;
         }
         else {
             return this.formsSub.map(function (res) {

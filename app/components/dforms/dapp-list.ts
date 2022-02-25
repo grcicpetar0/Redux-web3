@@ -11,7 +11,7 @@ import { addApp } from '../../actions';
 @Component({
   selector: 'dapp-list',
   templateUrl: 'app/components/dforms/dapp-list.html',
-  styleUrls: ['app/components/dforms/dforms.css'],
+  styleUrls: ['app/app.css','app/components/dforms/dforms.css'],
   directives: [Dapp]
 })
 
@@ -23,11 +23,13 @@ export class DappList {
     constructor(private store: FormStore) {
         this.showDappForm = false;
 
+
         this.newDapp = {
           'slug': '',
           'name': '',
           'description': '',
-          'version': 1
+          'version': '1',
+          'supportEmail': ''
         }
     }
 

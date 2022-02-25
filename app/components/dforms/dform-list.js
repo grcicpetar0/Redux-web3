@@ -23,7 +23,9 @@ var DformList = (function () {
             'id': null,
             'name': '',
             'description': '',
-            'fields': []
+            'fields': [],
+            'apps': [],
+            'version': '1',
         };
     }
     DformList.prototype.addForm = function (form) {
@@ -36,7 +38,7 @@ var DformList = (function () {
         core_1.Component({
             selector: 'form-list',
             templateUrl: 'app/components/dforms/dform-list.html',
-            styleUrls: ['app/components/dforms/dforms.css'],
+            styleUrls: ['app/app.css', 'app/components/dforms/dforms.css'],
             directives: [dform_1.Dform, dform_form_1.DformForm, dapp_1.Dapp]
         }), 
         __metadata('design:paramtypes', [form_store_1.FormStore])

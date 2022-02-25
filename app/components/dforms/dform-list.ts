@@ -12,7 +12,7 @@ import { addForm } from '../../actions';
 @Component({
   selector: 'form-list',
   templateUrl: 'app/components/dforms/dform-list.html',
-  styleUrls: ['app/components/dforms/dforms.css'],
+  styleUrls: ['app/app.css',  'app/components/dforms/dforms.css'],
   directives: [Dform, DformForm, Dapp]
 })
 
@@ -25,11 +25,14 @@ export class DformList {
         this.formID = 0;
         this.showDformForm = false;
 
+
         this.newForm = {
           'id': null,
           'name': '',
           'description': '',
-          'fields': []
+          'fields': [],
+          'apps': [],
+          'version': '1',
         }
     }
 
